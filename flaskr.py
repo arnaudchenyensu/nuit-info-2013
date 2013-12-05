@@ -13,10 +13,64 @@
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
+from flask.ext.login import LoginManager
 
 
 # create our little application :)
 app = Flask(__name__)
+
+# custom 
+login_manager = LoginManager()
+login_manager.init_app(app)
+'''
+@login_manager.user_loader
+def load_user(userid):
+    return User.get(userid)
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        # login and validate the user...
+        login_user(user)
+        flash("Logged in successfully.")
+        return redirect(request.args.get("next") or url_for("index"))
+    return render_template("login.html", form=form)
+
+@app.route("/settings")
+@login_required
+def settings():
+    pass
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(somewhere)
+'''
+class User:
+    def __init__(self, name, id, active=True):
+        self.name = name
+        self.id = id
+        self.active = active
+
+    def is_active(self):
+        # Here you should write whatever the code is
+        # that checks the database if your user is active
+        return self.active
+
+    def is_anonymous(self):
+        return False
+
+    def is_authenticated(self):
+        return True
+
+@login_manager.user_loader
+def load_user(id):
+     # 1. Fetch against the database a user by `id` 
+     # 2. Create a new object of `User` class and return it.
+    u = DBUsers.query.get(id)
+    return User(u.name,u.id,u.active)
 
 # Load default config and override config from an environment variable
 app.config.update(dict(
@@ -42,6 +96,8 @@ def init_db():
         db = get_db()
         with app.open_resource('schema.sql', mode='r') as f:
             db.cursor().executescript(f.read())
+
+	
         db.commit()
 
 
@@ -80,28 +136,31 @@ def add_entry():
     flash('New entry was successfully posted')
     return redirect(url_for('show_entries'))
 
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != app.config['USERNAME']:
-            error = 'Invalid username'
-        elif request.form['password'] != app.config['PASSWORD']:
-            error = 'Invalid password'
+        db = get_db()
+    	cur = db.execute('select username, password from users where username = ? and password = ?', [request.form['username'], request.form['password']])
+	results = cur.fetchall()
+	for row in results:
+	    username = row[0]
+            password = row[1]
+            print "logged in username=%s,password=%s" % (username, password)
+
+        if len(results) <= 0:
+            error = 'Invalid username or password'
         else:
             session['logged_in'] = True
             flash('You were logged in')
             return redirect(url_for('show_entries'))
     return render_template('login.html', error=error)
 
-
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
     flash('You were logged out')
     return redirect(url_for('show_entries'))
-
 
 if __name__ == '__main__':
     init_db()
