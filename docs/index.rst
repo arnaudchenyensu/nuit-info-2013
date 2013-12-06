@@ -41,6 +41,26 @@ C'est la base même de notre architecture. Nous avons décidé d'utiliser Python
 
 Nous avons décidé d'utiliser le web framework Flask a la place du plus populaire framework `Django <https://www.djangoproject.com/>`_ car nous l'avons trouvé plus simple d'utilisation et donc plus approprié pour la nuit de l'info.
 
+Installation et utilisation de l'application web
+------------------------------------------------
+
+Il faut tout d'abord installer les paquets suivants:
+
+* `requests <http://requests.readthedocs.org/en/latest/>`_
+* `Flask <http://flask.pocoo.org/>`_
+* `Flask-WTF <http://pypi.python.org/pypi/Flask-WTF>`_
+* `Flask-SQLAlchemy <http://pypi.python.org/pypi/Flask-SQLAlchemy>`_
+* `Flask-login <http://pypi.python.org/pypi/Flask-Login>`_
+
+Ensuite, les ports 2053 et 2057 doivent être ouverts et il faut lancer le serveur web ayant pour docroot `images_tmp`:
+
+`python -m SimpleHTTPServer 2057`
+
+S'assurer que l'application soit accessible depuis Internet (service de google images utilisé). Enfin, lancer l'application:
+
+`python gos14.py`
+
+
 Documentation API
 -----------------
 

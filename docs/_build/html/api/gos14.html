@@ -40,6 +40,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="models.html" title="models Module"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -54,8 +57,106 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="gos14-module">
-<h1>gos14 Module<a class="headerlink" href="#gos14-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-gos14">
+<span id="gos14-module"></span><h1>gos14 Module<a class="headerlink" href="#module-gos14" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="gos14.LoginForm">
+<em class="property">class </em><tt class="descclassname">gos14.</tt><tt class="descname">LoginForm</tt><big>(</big><em>formdata=None</em>, <em>obj=None</em>, <em>prefix=''</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/gos14.html#LoginForm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gos14.LoginForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">wtforms.form.Form</span></tt></p>
+<p>Template for the login form.</p>
+<dl class="attribute">
+<dt id="gos14.LoginForm.email">
+<tt class="descname">email</tt><em class="property"> = &lt;UnboundField(TextField, ('email',), {})&gt;</em><a class="headerlink" href="#gos14.LoginForm.email" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="gos14.LoginForm.password">
+<tt class="descname">password</tt><em class="property"> = &lt;UnboundField(PasswordField, ('password',), {})&gt;</em><a class="headerlink" href="#gos14.LoginForm.password" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="gos14.LoginForm.submit">
+<tt class="descname">submit</tt><em class="property"> = &lt;UnboundField(SubmitField, ('Login',), {})&gt;</em><a class="headerlink" href="#gos14.LoginForm.submit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="gos14.LoginForm.username">
+<tt class="descname">username</tt><em class="property"> = &lt;UnboundField(TextField, ('username',), {})&gt;</em><a class="headerlink" href="#gos14.LoginForm.username" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="gos14.connect_db">
+<tt class="descclassname">gos14.</tt><tt class="descname">connect_db</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/gos14.html#connect_db"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gos14.connect_db" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connects to the specific database.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gos14.entries">
+<tt class="descclassname">gos14.</tt><tt class="descname">entries</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/gos14.html#entries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gos14.entries" title="Permalink to this definition">¶</a></dt>
+<dd><p>If methods == &#8216;POST&#8217;, a new entry is created,
+if methods == &#8216;GET&#8217;, a list of entries is displayed.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gos14.get_db">
+<tt class="descclassname">gos14.</tt><tt class="descname">get_db</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/gos14.html#get_db"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gos14.get_db" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens a new database connection if there is none yet for the
+current application context.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gos14.home">
+<tt class="descclassname">gos14.</tt><tt class="descname">home</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/gos14.html#home"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gos14.home" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the defaut page.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gos14.load_user">
+<tt class="descclassname">gos14.</tt><tt class="descname">load_user</tt><big>(</big><em>userid</em><big>)</big><a class="reference internal" href="../_modules/gos14.html#load_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gos14.load_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="gos14.login">
+<tt class="descclassname">gos14.</tt><tt class="descname">login</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/gos14.html#login"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gos14.login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs the login option.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gos14.logout">
+<tt class="descclassname">gos14.</tt><tt class="descname">logout</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/gos14.html#logout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gos14.logout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logout the user.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gos14.searchbyimage">
+<tt class="descclassname">gos14.</tt><tt class="descname">searchbyimage</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/gos14.html#searchbyimage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gos14.searchbyimage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="gos14.show_entry">
+<tt class="descclassname">gos14.</tt><tt class="descname">show_entry</tt><big>(</big><em>entry_id</em><big>)</big><a class="reference internal" href="../_modules/gos14.html#show_entry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gos14.show_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a specific entry.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gos14.shutdown_session">
+<tt class="descclassname">gos14.</tt><tt class="descname">shutdown_session</tt><big>(</big><em>exception=None</em><big>)</big><a class="reference internal" href="../_modules/gos14.html#shutdown_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gos14.shutdown_session" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="gos14.uploadimage">
+<tt class="descclassname">gos14.</tt><tt class="descname">uploadimage</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/gos14.html#uploadimage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gos14.uploadimage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="gos14.users">
+<tt class="descclassname">gos14.</tt><tt class="descname">users</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/gos14.html#users"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gos14.users" title="Permalink to this definition">¶</a></dt>
+<dd><p>If methods == &#8216;POST&#8217;, a new user is created,
+if methods == &#8216;GET&#8217;, a list of all user is displayed.</p>
+</dd></dl>
+
 </div>
 
 

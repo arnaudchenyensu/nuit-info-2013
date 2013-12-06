@@ -39,6 +39,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="gos14.html" title="gos14 Module"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">nuit-info-2013-gos14 1.0 documentation</a> &raquo;</li> 
@@ -50,8 +53,82 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="models-module">
-<h1>models Module<a class="headerlink" href="#models-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-models">
+<span id="models-module"></span><h1>models Module<a class="headerlink" href="#module-models" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="models.Entry">
+<em class="property">class </em><tt class="descclassname">models.</tt><tt class="descname">Entry</tt><big>(</big><em>title=None</em>, <em>text=None</em><big>)</big><a class="reference internal" href="../_modules/models.html#Entry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.Entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">sqlalchemy.ext.declarative.api.Base</span></tt></p>
+<p>Entry model.</p>
+<dl class="attribute">
+<dt id="models.Entry.id">
+<tt class="descname">id</tt><a class="headerlink" href="#models.Entry.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="models.Entry.text">
+<tt class="descname">text</tt><a class="headerlink" href="#models.Entry.text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="models.Entry.title">
+<tt class="descname">title</tt><a class="headerlink" href="#models.Entry.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="models.Entry.user_id">
+<tt class="descname">user_id</tt><a class="headerlink" href="#models.Entry.user_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.User">
+<em class="property">class </em><tt class="descclassname">models.</tt><tt class="descname">User</tt><big>(</big><em>username=None</em>, <em>email=None</em>, <em>password=None</em><big>)</big><a class="reference internal" href="../_modules/models.html#User"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.User" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">sqlalchemy.ext.declarative.api.Base</span></tt></p>
+<p>User model.</p>
+<dl class="attribute">
+<dt id="models.User.email">
+<tt class="descname">email</tt><a class="headerlink" href="#models.User.email" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="models.User.entries">
+<tt class="descname">entries</tt><a class="headerlink" href="#models.User.entries" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="models.User.get_id">
+<tt class="descname">get_id</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/models.html#User.get_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.User.get_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="models.User.id">
+<tt class="descname">id</tt><a class="headerlink" href="#models.User.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="models.User.is_active">
+<tt class="descname">is_active</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/models.html#User.is_active"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.User.is_active" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="models.User.is_authenticated">
+<tt class="descname">is_authenticated</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/models.html#User.is_authenticated"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.User.is_authenticated" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="models.User.password">
+<tt class="descname">password</tt><a class="headerlink" href="#models.User.password" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="models.User.username">
+<tt class="descname">username</tt><a class="headerlink" href="#models.User.username" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
 
 

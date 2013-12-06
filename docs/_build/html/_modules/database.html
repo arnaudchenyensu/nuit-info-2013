@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>krTheme Sphinx Style &mdash; nuit-info-2013-gos14 1.0 documentation</title>
+    <title>database &mdash; nuit-info-2013-gos14 1.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,6 +25,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="nuit-info-2013-gos14 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -40,7 +41,8 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">nuit-info-2013-gos14 1.0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">nuit-info-2013-gos14 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -49,33 +51,25 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="krtheme-sphinx-style">
-<h1>krTheme Sphinx Style<a class="headerlink" href="#krtheme-sphinx-style" title="Permalink to this headline">¶</a></h1>
-<p>This repository contains sphinx styles Kenneth Reitz uses in most of
-his projects. It is a derivative of Mitsuhiko&#8217;s themes for Flask and Flask related
-projects.  To use this style in your Sphinx documentation, follow
-this guide:</p>
-<ol class="arabic">
-<li><p class="first">put this folder as _themes into your docs folder.  Alternatively
-you can also use git submodules to check out the contents there.</p>
-</li>
-<li><p class="first">add this to your conf.py:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s">&#39;_themes&#39;</span><span class="p">))</span>
-<span class="n">html_theme_path</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;_themes&#39;</span><span class="p">]</span>
-<span class="n">html_theme</span> <span class="o">=</span> <span class="s">&#39;flask&#39;</span>
-</pre></div>
-</div>
-</li>
-</ol>
-<p>The following themes exist:</p>
-<dl class="docutils">
-<dt><strong>kr</strong></dt>
-<dd>the standard flask documentation theme for large projects</dd>
-<dt><strong>kr_small</strong></dt>
-<dd>small one-page theme.  Intended to be used by very small addon libraries.</dd>
-</dl>
-</div>
+  <h1>Source code for database</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">scoped_session</span><span class="p">,</span> <span class="n">sessionmaker</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.ext.declarative</span> <span class="kn">import</span> <span class="n">declarative_base</span>
 
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">&#39;sqlite:////tmp/test.db&#39;</span><span class="p">,</span> <span class="n">convert_unicode</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">db_session</span> <span class="o">=</span> <span class="n">scoped_session</span><span class="p">(</span><span class="n">sessionmaker</span><span class="p">(</span><span class="n">autocommit</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                         <span class="n">autoflush</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                         <span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">))</span>
+<span class="n">Base</span> <span class="o">=</span> <span class="n">declarative_base</span><span class="p">()</span>
+<span class="n">Base</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="n">db_session</span><span class="o">.</span><span class="n">query_property</span><span class="p">()</span>
+
+<div class="viewcode-block" id="init_db"><a class="viewcode-back" href="../api/database.html#database.init_db">[docs]</a><span class="k">def</span> <span class="nf">init_db</span><span class="p">():</span>
+    <span class="c"># import all modules here that might define models so that</span>
+    <span class="c"># they will be registered properly on the metadata.  Otherwise</span>
+    <span class="c"># you will have to import them first before calling init_db()</span>
+    <span class="kn">import</span> <span class="nn">models</span>
+    <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span></div>
+</pre></div>
 
           </div>
         </div>
@@ -84,13 +78,10 @@ you can also use git submodules to check out the contents there.</p>
         <div class="sphinxsidebarwrapper"><h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
   </ul></li>
 </ul>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/_themes/README.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">

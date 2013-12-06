@@ -6,4 +6,4 @@ Ce repertoire contient les sources et la documentation de l'application web (en 
 * [Application iOS](https://github.com/SebastienFCT/Y-mobile)
 * [Application Android](https://github.com/laza1618/android_dashboard)
 
-La documentation se trouve dans le repertoire `docs/_build/index.html` ou sur le site [Read the Docs](https://readthedocs.org/).
+La documentation se trouve dans le repertoire `docs/_build/index.html` ou sur le site [Read the Docs](http://nuit-info-2013-gos14.readthedocs.org/en/latest/).
