@@ -25,12 +25,17 @@ from database import db_session
 from database import init_db
 from models import User, Entry
 
+# Flask-Login
+from flask.ext.login import LoginManager, login_user, login_required
+
 
 # create our little application :)
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 # Load default config and override config from an environment variable
 app.config.update(dict(
@@ -57,16 +62,6 @@ def connect_db():
     return rv
 
 
-# def init_db():
-#     """Creates the database tables."""
-#     with app.app_context():
-#         db = get_db()
-#         with app.open_resource('schema.sql', mode='r') as f:
-#             db.cursor().executescript(f.read())
-#         db.commit()
-
-
-
 def get_db():
     """Opens a new database connection if there is none yet for the
     current application context.
@@ -89,18 +84,18 @@ def shutdown_session(exception=None):
 
 
 # Resource for User Class
-@app.route('/users', methods=['POST'])
-def add_user():
-    form = LoginForm(request.values)
-    u = User(form.username.data, form.email.data, form.password.data)
-    db_session.add(u)
-    db_session.commit()
-    # return u
-    # User.query.all()
-    # [<User u'admin'>]
-    # User.query.filter(User.name == 'admin').first()
-    # <User u'admin'>
-    return render_template('login.html', form=form)
+@app.route('/users', methods=['GET', 'POST'])
+def users():
+    if request.method == 'POST':
+        form = LoginForm(request.values)
+        u = User(form.username.data, form.email.data, form.password.data)
+        db_session.add(u)
+        db_session.commit()
+        flash('Account created! You can now login!')
+        return render_template('login.html', form=form)
+    if request.method == 'GET':
+        users = User.query.all()
+        return render_template('users.html', users=users)
 
 
 @app.route('/')
@@ -124,10 +119,12 @@ def entries():
     if request.method == 'POST':
         if not session.get('logged_in'):
             abort(401)
-        db = get_db()
-        db.execute('insert into entries (title, text) values (?, ?)',
-                     [request.form['title'], request.form['text']])
-        db.commit()
+        # db = get_db()
+        # db.execute('insert into entries (title, text) values (?, ?)',
+                     # [request.form['title'], request.form['text']])
+        entry = Entry(request.form['title'], request.form['text'])
+        db_session.add(entry)
+        db_session.commit()
         flash('New entry was successfully posted')
         return redirect(url_for('entries'))
 
@@ -135,7 +132,6 @@ def entries():
 def show_entry(entry_id):
     entry = Entry.query.get(entry_id)
     return render_template('show_entry.html', entry=entry)
-    # return 'Post %d' % entry_id
 
 
 # @app.route('/add', methods=['POST'])
@@ -149,23 +145,20 @@ def show_entry(entry_id):
 #     flash('New entry was successfully posted')
 #     return redirect(url_for('show_entries'))
 
+@login_manager.user_loader
+def load_user(userid):
+    return User.query.get(userid)
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
+    form = LoginForm(request.values)
     error = None
     if request.method == 'POST':
-        db = get_db()
-    	cur = db.execute('select username, password from users where username = ? and password = ?', [request.form['username'], request.form['password']])
-	results = cur.fetchall()
-	for row in results:
-	    username = row[0]
-            password = row[1]
-            print "-> logged in : username=%s,password=%s" % (username, password)
-
-        if len(results) <= 0:
-            error = 'Invalid username or password'
-        else:
+        user = User.query.filter_by(username = form.username.data).first()
+        if user is not None and user.password == form.password.data:
             session['logged_in'] = True
+            login_user(user)
             flash('You were logged in')
             return redirect(url_for('home'))
     flash('Username/password incorrect')
