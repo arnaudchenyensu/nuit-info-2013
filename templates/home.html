@@ -1,8 +1,41 @@
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-	<h2>You are succesfully logged in</h2>
-</body>
-</html>
+{% extends "layout.html"%}
+
+{% block title %}Accueil{% endblock %}
+{% block body %}
+    <script type="text/javascript">
+        function getFilename (field) {
+            filename = document.getElementById(field).value;
+            document.getElementById(field+'_filename').innerHTML = filename;
+        }
+    </script>
+
+<div id="content">
+	<div id="menu">
+        <ul>
+            <li><a href="/"><img src="{{ url_for('static', filename='img/home_b.png') }}" alt="Home" title="Accueil"></a></li>
+            <li><a href="/entries"><img src="{{ url_for('static', filename='img/caq_b.png') }}" alt="CAQ" title="Commerce à question"></a></li>
+        </ul>
+    </div>
+
+    <div id="sub_content">
+        <div id="homeMessage">
+            <h1>Bonjour,</h1>
+        </div>
+        <h1>Recherche par image ..</h1>
+        <form method="POST" action="/uploadimage" id="form_sem_by_image" enctype="multipart/form-data">
+            <label for="url_image">Choisissez une image ...</label>
+            <input id="url_image" name="url_image" type="file" onchange="javascript:getFilename('url_image');return false;">
+	    <span id="url_image_filename"></span>
+            <button type="submit">Surprenez moi!</button>
+        </form>
+	<br>
+	<em style="display:block; text-align:center; color:gray;">* Utilise Google Images!</em>
+    </div>
+
+    
+    
+</div>
+<!-- Chargement des scripts -->
+<script src="{{ url_for('static', filename='js/jquery.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/animation.js') }}" type="text/javascript"></script>
+{% endblock %}	

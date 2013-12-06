@@ -1,9 +1,52 @@
 {% extends "layout.html" %}
+{% block title %}{{ entry.title }}{% endblock %}
 {% block body %}
-  <ul class=entries>
-    <li><h2>{{ entry.title }}</h2>{{ entry.text|safe }}
+  
+    
+      <div id="content">
+          <div id="menu">
+                <ul>
+                    <li><a href="/"><img src="{{ url_for('static', filename='img/home_b.png') }}" alt="Home" title="Accueil"></a></li>
+                    <li><a href="/entries"><img src="{{ url_for('static', filename='img/caq_b.png') }}" alt="CAQ" title="Commerce à question"></a></li>
+                </ul>
+            </div>
+
+            <div id="sub_content">
+                <div class="title">
+                    <h1>Le CAQ</h1>
+                    <h4>{{ entry.title }}</h4>
+                </div>
+
+                <div id="annonce_content">
+                  {{ entry.text|safe }}
+                  <div id="disqus_thread"></div>
+                </div>
+            </div>
+
+            <div id="menu_right">
+                <ul>
+                    <li><a href="#ajouterSujet"><img src="{{ url_for('static', filename='img/ajouter_sujet.png') }}" alt=""></a></li>
+                    <li><a href="http://nuit-info-2013-gos14.readthedocs.org">?</a></li>
+                </ul>
+            </div>
+            {% if session.logged_in %}
+             <div id="ajoutAnnonce">
+                <div id="popupBottom">
+                    <div class="title">
+                        <h1>Le CAQ</h1>
+                        <h4>Ajoutez votre annonce</h4>
+                        <span rel="ajoutAnnonce">x</span>
+                    </div>
+                </div>
+                <form id="form_ajout_annonce" action="{{ url_for('entries') }}" method=post class=add-entry>
+                    <input type="text" id="titre" name="title" placeholder="Titre de l'annonce">
+                    <textarea name="text" id="description" cols="30" rows="10" placeholder="Ex: Le meilleur café du monde pour tenir à la nuit de l'informatique .."></textarea>
+                    <button type="submit">Envoyer</button>
+                </form>
+            </div>
+             {% endif %}  
+        </div>   
       
-      <div id="disqus_thread"></div>
       <script type="text/javascript">
           /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
           var disqus_shortname = 'nuitinfo'; // required: replace example with your forum shortname
@@ -17,5 +60,8 @@
       </script>
       <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
       <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+       <!-- Chargement des scripts -->
+  <script src="{{ url_for('static', filename='js/jquery.js') }}" type="text/javascript"></script>
+  <script src="{{ url_for('static', filename='js/animation.js') }}" type="text/javascript"></script>
   </ul>
 {% endblock %}
