@@ -13,7 +13,6 @@
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
-from flaskext.bcrypt import Bcrypt
 
 # WTForm
 from flask_wtf import Form
@@ -34,7 +33,6 @@ import os
 
 # create our little application :)
 app = Flask(__name__)
-bcrypt = Bcrypt(app)
 app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
 login_manager = LoginManager()
@@ -209,4 +207,4 @@ def logout():
 
 if __name__ == '__main__':
     init_db()
-    app.run()
+    app.run(host='0.0.0.0', port=2053)
