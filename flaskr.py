@@ -13,7 +13,7 @@
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
-from flaskext.bcrypt import Bcrypt
+# from flaskext.bcrypt import Bcrypt
 
 # WTForm
 from flask_wtf import Form
@@ -31,7 +31,7 @@ import os
 
 # create our little application :)
 app = Flask(__name__)
-bcrypt = Bcrypt(app)
+# bcrypt = Bcrypt(app)
 app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
 
@@ -122,24 +122,28 @@ def searchbyimage():
 def uploadimage():
     uploadedfile = request.files['url_image']
     print uploadedfile
-    path = os.path.join('/tmp', uploadedfile.filename)
+    path = os.path.join('/home/equipe1/www/goodcommerce/images_tmp', uploadedfile.filename)
     uploadedfile.save(path)
 
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36',
+       'User-Agent': 'Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36',
     }
-    # r = requests.get('http://www.google.fr/searchbyimage?image_url=' + path, headers=headers)
-    r = requests.get('http://www.google.fr/searchbyimage?image_url=' + 'http://www.pianopolis.fr/components/com_virtuemart/shop_image/product/Piano_KAWA___K8_50a294f804d30.png', headers=headers)
+    r = requests.get('http://www.google.fr/searchbyimage?image_url=' + 'http://nuitdelinfo.univ-reunion.fr:2057/' + uploadedfile.filename, headers=headers)
     print r.status_code
-    print r.text
+    # print r.text.encode('ascii')
+    body = r.text
+    body = body.encode('utf-8')
+    sbiq = '"sbiq":"'
+    sbiqpos = body.find(sbiq)
+    quotepos = body.find('"',sbiqpos + len(sbiq)) 
+    print body[sbiqpos:sbiqpos+50]
+    print body[sbiqpos + len(sbiq) : quotepos]
 
     # file = open('/tmp/googleresult', 'w')
     # file.write(r.text)
     # file.close()
 
     print r.request.headers
-    print r.text.find('script')
-    print r.text.find('queue')
 
     return redirect(url_for('home'))
 
@@ -192,4 +196,4 @@ def logout():
 
 if __name__ == '__main__':
     init_db()
-    app.run()
+    app.run(host='0.0.0.0',port=2053)
