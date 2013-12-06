@@ -30,6 +30,8 @@ from flask.ext.login import LoginManager, login_user, login_required
 import httplib
 import requests
 import os
+import json
+import urllib
 
 # create our little application :)
 app = Flask(__name__)
@@ -134,18 +136,6 @@ def show_entry(entry_id):
     entry = Entry.query.get(entry_id)
     return render_template('show_entry.html', entry=entry)
 
-
-# @app.route('/add', methods=['POST'])
-# def add_entry():
-#     if not session.get('logged_in'):
-#         abort(401)
-#     db = get_db()
-#     db.execute('insert into entries (title, text) values (?, ?)',
-#                  [request.form['title'], request.form['text']])
-#     db.commit()
-#     flash('New entry was successfully posted')
-#     return redirect(url_for('show_entries'))
-
 @login_manager.user_loader
 def load_user(userid):
     return User.query.get(userid)
@@ -181,22 +171,33 @@ def uploadimage():
     }
     r = requests.get('http://www.google.fr/searchbyimage?image_url=' + 'http://nuitdelinfo.univ-reunion.fr:2057/' + uploadedfile.filename, headers=headers)
     print r.status_code
-    # print r.text.encode('ascii')
     body = r.text
     body = body.encode('utf-8')
     sbiq = '"sbiq":"'
     sbiqpos = body.find(sbiq)
     quotepos = body.find('"',sbiqpos + len(sbiq)) 
-    print body[sbiqpos:sbiqpos+50]
-    print body[sbiqpos + len(sbiq) : quotepos]
+    
+    # keywords contains very precise description of the image but we only take the first keyword for simplicity
+    keywords = body[sbiqpos + len(sbiq) : quotepos]
+    keyword = keywords[:keywords.find(' ')]
+    print keyword
+    os.remove(os.path.join('images_tmp', uploadedfile.filename))
 
-    # file = open('/tmp/googleresult', 'w')
-    # file.write(r.text)
-    # file.close()
-
-    print r.request.headers
-
-    return redirect(url_for('home'))
+    # api_key = open(".freebase_api_key").read()
+    service_url = 'https://www.googleapis.com/freebase/v1/topic'
+    topic_id = '/m/0d6lp'
+    params = {
+    #    'key': api_key,
+        'filter': 'all' 
+    }
+    url = service_url + topic_id + '?' + urllib.urlencode(params)
+    topic = json.loads(urllib.urlopen(url).read())
+    return json.dumps(topic)
+#    for property in topic['property']:
+#        print property + ':'
+#        for value in topic['property'][property]['values']:
+#            print ',' + value['text'].encode('utf-8')
+#    return redirect(url_for('home'))
 
 
 @app.route('/logout')
