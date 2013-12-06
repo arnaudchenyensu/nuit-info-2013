@@ -177,16 +177,20 @@ def uploadimage():
     
     # keywords contains very precise description of the image but we only take the first keyword for simplicity
     keywords = body[sbiqpos + len(sbiq) : quotepos]
-    keyword = keywords[:keywords.find(' ')]
-    print keyword
-    os.remove(os.path.join('images_tmp', uploadedfile.filename))
+    return redirect('http://www.leboncoin.fr/annonces/offres/centre/?f=a&th=1&q=' + keywords)
+
+#    Wanted to use semantic web but too long...
+
+#    keyword = keywords[:keywords.find(' ')]
+#    print keyword
+#    os.remove(os.path.join('images_tmp', uploadedfile.filename))
 
     # api_key = open(".freebase_api_key").read()
-    service_url = 'https://www.googleapis.com/freebase/v1/mqlread'
-    params = '[{  "type": "/business/consumer_product", "id": null, "name~=": "' + keyword + '" }]'
-    url = service_url + '?query=' + params
-    topic = json.loads(urllib.urlopen(url).read())
-    return json.dumps(topic)
+#    service_url = 'https://www.googleapis.com/freebase/v1/mqlread'
+#    params = '[{  "type": "/business/consumer_product", "id": null, "name~=": "' + keyword + '" }]'
+#    url = service_url + '?query=' + params
+#    topic = json.loads(urllib.urlopen(url).read())
+#    return json.dumps(topic)
 #    for property in topic['property']:
 #        print property + ':'
 #        for value in topic['property'][property]['values']:

@@ -2,6 +2,13 @@
 
 {% block title %}Accueil{% endblock %}
 {% block body %}
+    <script type="text/javascript">
+        function getFilename (field) {
+            filename = document.getElementById(field).value;
+            document.getElementById(field+'_filename').innerHTML = filename;
+        }
+    </script>
+
 <div id="content">
 	<div id="menu">
         <ul>
@@ -14,18 +21,15 @@
         <div id="homeMessage">
             <h1>Bonjour,</h1>
         </div>
-        <h1>Par mots clés ..</h1>
-        <form action="/" method="POST" id="form_sem">
-            <input type="text" id="tag" placeholder="Entrez votre envie du moment ...">
-            <button type="submit">Surprenez moi!</button>
-        </form>
-        <h1>Par image ..</h1>
+        <h1>Recherche par image ..</h1>
         <form method="POST" action="/uploadimage" id="form_sem_by_image" enctype="multipart/form-data">
             <label for="url_image">Choisissez une image ...</label>
-            <input id="url_image" name="url_image" type="file" placeholder="">
+            <input id="url_image" name="url_image" type="file" onchange="javascript:getFilename('url_image');return false;">
+	    <span id="url_image_filename"></span>
             <button type="submit">Surprenez moi!</button>
         </form>
-
+	<br>
+	<em style="display:block; text-align:center; color:gray;">* Utilise Google Images!</em>
     </div>
 
     
