@@ -184,13 +184,9 @@ def uploadimage():
     os.remove(os.path.join('images_tmp', uploadedfile.filename))
 
     # api_key = open(".freebase_api_key").read()
-    service_url = 'https://www.googleapis.com/freebase/v1/topic'
-    topic_id = '/m/0d6lp'
-    params = {
-    #    'key': api_key,
-        'filter': 'all' 
-    }
-    url = service_url + topic_id + '?' + urllib.urlencode(params)
+    service_url = 'https://www.googleapis.com/freebase/v1/mqlread'
+    params = '[{  "type": "/business/consumer_product", "id": null, "name~=": "' + keyword + '" }]'
+    url = service_url + '?query=' + params
     topic = json.loads(urllib.urlopen(url).read())
     return json.dumps(topic)
 #    for property in topic['property']:
