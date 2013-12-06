@@ -25,6 +25,9 @@ from database import db_session
 from database import init_db
 from models import User
 
+import httplib
+import requests
+import os
 
 # create our little application :)
 app = Flask(__name__)
@@ -110,6 +113,35 @@ def home():
     else:
         form = LoginForm()
         return render_template('login.html', form=form)
+
+@app.route('/searchbyimage')
+def searchbyimage():
+    return render_template('searchbyimage.html')
+
+@app.route('/uploadimage', methods=['POST'])
+def uploadimage():
+    uploadedfile = request.files['url_image']
+    print uploadedfile
+    path = os.path.join('/tmp', uploadedfile.filename)
+    uploadedfile.save(path)
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36',
+    }
+    # r = requests.get('http://www.google.fr/searchbyimage?image_url=' + path, headers=headers)
+    r = requests.get('http://www.google.fr/searchbyimage?image_url=' + 'http://www.pianopolis.fr/components/com_virtuemart/shop_image/product/Piano_KAWA___K8_50a294f804d30.png', headers=headers)
+    print r.status_code
+    print r.text
+
+    # file = open('/tmp/googleresult', 'w')
+    # file.write(r.text)
+    # file.close()
+
+    print r.request.headers
+    print r.text.find('script')
+    print r.text.find('queue')
+
+    return redirect(url_for('home'))
 
 @app.route('/entries')
 def show_entries():
