@@ -1,15 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-    Flaskr
-    ~~~~~~
-
-    A microblog example application written as Flask tutorial with
-    Flask and sqlite3.
-
-    :copyright: (c) 2010 by Armin Ronacher.
-    :license: BSD, see LICENSE for more details.
-"""
-
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
@@ -50,6 +38,7 @@ app.config.update(dict(
 
 # Create the login form.
 class LoginForm(Form):
+    """Template for the login form."""
     username = TextField('username')
     email = TextField('email')
     password = PasswordField('password')
@@ -72,13 +61,6 @@ def get_db():
     return g.sqlite_db
 
 
-# @app.teardown_appcontext
-# def close_db(error):
-#     """Closes the database again at the end of the request."""
-#     if hasattr(g, 'sqlite_db'):
-#         g.sqlite_db.close()
-
-
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     db_session.remove()
@@ -87,6 +69,10 @@ def shutdown_session(exception=None):
 # Resource for User Class
 @app.route('/users', methods=['GET', 'POST'])
 def users():
+    """
+    If methods == 'POST', a new user is created,
+    if methods == 'GET', a list of all user is displayed.
+    """
     if request.method == 'POST':
         form = LoginForm(request.values)
         u = User(form.username.data, form.email.data, form.password.data)
@@ -101,6 +87,7 @@ def users():
 
 @app.route('/')
 def home():
+    """Display the defaut page."""
     if 'logged_in' in session:
         db = get_db()
         cur = db.execute('select id, title, text from entries order by id desc')
@@ -112,6 +99,10 @@ def home():
 
 @app.route('/entries', methods=['GET','POST'])
 def entries():
+    """
+    If methods == 'POST', a new entry is created,
+    if methods == 'GET', a list of entries is displayed.
+    """
     if request.method == 'GET':
         db = get_db()
         cur = db.execute('select id, title, text from entries order by id desc')
@@ -131,20 +122,10 @@ def entries():
 
 @app.route('/entries/<int:entry_id>')
 def show_entry(entry_id):
+    """Display a specific entry."""
     entry = Entry.query.get(entry_id)
     return render_template('show_entry.html', entry=entry)
 
-
-# @app.route('/add', methods=['POST'])
-# def add_entry():
-#     if not session.get('logged_in'):
-#         abort(401)
-#     db = get_db()
-#     db.execute('insert into entries (title, text) values (?, ?)',
-#                  [request.form['title'], request.form['text']])
-#     db.commit()
-#     flash('New entry was successfully posted')
-#     return redirect(url_for('show_entries'))
 
 @login_manager.user_loader
 def load_user(userid):
@@ -153,6 +134,7 @@ def load_user(userid):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    """Performs the login option."""
     form = LoginForm(request.values)
     error = None
     if request.method == 'POST':
@@ -201,6 +183,7 @@ def uploadimage():
 
 @app.route('/logout')
 def logout():
+    """Logout the user."""
     session.pop('logged_in', None)
     flash('You were logged out')
     return redirect(url_for('home'))

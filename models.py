@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship, backref
 from database import Base
 
 class User(Base):
+    """User model."""
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
     username = Column(String(50), unique=True)
@@ -33,6 +34,7 @@ class User(Base):
 
 
 class Entry(Base):
+    """Entry model."""
     __tablename__ = 'entries'
     id = Column(Integer, primary_key=True)
     title = Column(String(120), unique=True)
@@ -45,3 +47,4 @@ class Entry(Base):
 
     def __repr__(self):
         return '<User %r>' % (self.username)
+
