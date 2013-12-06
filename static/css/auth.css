@@ -1,0 +1,90 @@
+@font-face { font-family: Aller; src: url('Aller_Lt.ttf'); } 
+body{
+	background-color:#5d96ff;
+	overflow:hidden;
+	}
+	
+h1{
+	font-family: Aller;
+	color:white;
+	font-size:50px;
+	position:relative;
+	text-align:center;
+}
+h2{
+	font-family: Aller;
+	color:white;
+	font-size:20px;
+	position:relative;
+	text-align:center;
+}
+form.auth_form{
+	width:600px;
+	margin:auto;
+}
+
+form.auth_form input[type="text"],form.auth_form input[type="password"], form.auth_form input[type="email"]{
+	font-family: Aller;
+	font-size:30px;
+	display:block;
+	margin: auto;
+	width:350px;
+	height:50px;
+	margin-bottom:20px;
+	padding:10px;
+}
+form.auth_form input[type="submit"]{
+	font-family: Aller;
+	font-size:30px;
+	color:white;
+	display:block;
+	margin:auto;
+	
+	height:60px;
+	background:#ffc000;
+	border:none;
+}
+#loginBox{
+	position:relative;
+}
+#passwordBox{
+	position:relative;
+}
+.content{
+	position: relative;
+	margin-top:150px;
+}
+.socialN{
+	display:block;
+	margin:auto;
+	margin-top:30px;
+	width:40px;
+}
+.socialN:hover{
+	animation: monanimation 3s;
+	-webkit-animation: monanimation 3s infinite;
+}
+
+
+				@keyframes monanimation{
+				0% {
+					opacity:1;
+					}
+				50% {
+					opacity:0.2;
+				}
+				100% {
+					opacity:1;
+				}
+				}
+				@-webkit-keyframes monanimation{
+				0% {
+					opacity:1;
+					}
+				50% {
+					opacity:0.2;
+				}
+				100% {
+					opacity:1;
+				}
+				}

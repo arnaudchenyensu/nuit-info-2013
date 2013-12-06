@@ -1,8 +1,37 @@
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-	<h2>You are succesfully logged in</h2>
-</body>
-</html>
+{% extends "layout.html"%}
+
+{% block title %}Accueil{% endblock %}
+{% block body %}
+<div id="content">
+	<div id="menu">
+        <ul>
+            <li><a href="/"><img src="{{ url_for('static', filename='img/home_b.png') }}" alt="Home" title="Accueil"></a></li>
+            <li><a href="/entries"><img src="{{ url_for('static', filename='img/caq_b.png') }}" alt="CAQ" title="Commerce à question"></a></li>
+        </ul>
+    </div>
+
+    <div id="sub_content">
+        <div id="homeMessage">
+            <h1>Bonjour,</h1>
+        </div>
+        <h1>Par mots clés ..</h1>
+        <form action="/" method="POST" id="form_sem">
+            <input type="text" id="tag" placeholder="Entrez votre envie du moment ...">
+            <button type="submit">Surprenez moi!</button>
+        </form>
+        <h1>Par image ..</h1>
+        <form method="POST" action="/uploadimage" id="form_sem_by_image" enctype="multipart/form-data">
+            <label for="url_image">Choisissez une image ...</label>
+            <input id="url_image" name="url_image" type="file" placeholder="">
+            <button type="submit">Surprenez moi!</button>
+        </form>
+
+    </div>
+
+    
+    
+</div>
+<!-- Chargement des scripts -->
+<script src="{{ url_for('static', filename='js/jquery.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/animation.js') }}" type="text/javascript"></script>
+{% endblock %}	

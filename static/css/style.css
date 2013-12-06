@@ -1,0 +1,260 @@
+@font-face
+{
+font-family: "Aller Light";
+src: url('/fonts/Aller/Aller_Lt.ttf');
+}
+body{
+	font-family: "Aller Light";
+}
+ul{
+	padding: 0;
+}
+li{
+	list-style: none;
+}
+img{
+	border:none;
+	display: block;
+}
+#menu{
+	position: fixed;
+	float:left;
+}
+#menu ul{
+	width:100px;
+	padding: 0;
+	background: red;
+}
+#menu li{
+	list-style: none;
+}
+#menu img{
+	border:none;
+	display: block;
+
+}
+#menu a{
+	cursor: pointer;
+}
+#sub_content{
+	float:left;
+	width: 900px;
+	margin-left: 150px;
+}
+#sub_content .title{
+	width:900px;
+	font-family: "Aller Light";
+	background:#ffc000;
+	padding: 5px;
+}
+
+.title h1{
+	display:inline;
+	font-size: 20px;
+	padding: 0;
+	margin: 0;
+}
+.title h4{
+	display: inline;
+	padding: 0;
+	margin-left: 70px;
+	font-size: 15px;
+}
+
+#sub_content .title h1{
+	display:inline;
+	font-size: 20px;
+	padding: 0;
+	margin: 0;
+}
+
+#sub_content .title h4{
+	display: inline;
+	padding: 0;
+	margin-left: 70px;
+	font-size: 15px;
+}
+#annonce_content{
+	width: 100%;
+	padding: 5px;
+	background:#f6f6f6;
+}
+#menu_right{
+	position:fixed;
+	right:0;
+	font-size: 40px;
+	color: #FFF;
+
+}
+#menu_right a{
+	display: block;
+	text-decoration: none;
+	color: #FFF;
+	text-align: center;
+}
+#menu_right li{
+	width:40px;
+	height:100px;
+	background:#5d96ff;
+	margin-top: 10px;
+	cursor: pointer;
+}
+
+#menu_right li:hover{
+	background:#005aff;
+}
+#menu_right li a img{
+	display: block;
+	margin: auto;
+	padding-top: 35px;
+}
+
+#ajoutAnnonce {
+	position:fixed;
+	bottom: 0;
+	right: 0;
+	width:600px;
+	display: none;
+	border: #000 1px solid;
+	border-bottom: none;
+	border-right: none;
+	background: #FFF;
+	
+} 
+
+form#form_ajout_annonce input[type="text"], form#form_ajout_annonce textarea{
+	display: block;
+	padding: 5px;
+	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 95%;
+}
+
+form#form_ajout_annonce button{
+	margin-bottom: 5px;
+	background:#5d96ff;
+	border:none;
+	color: #FFF;
+	font-family: "Aller Light";
+	border-radius: 5px;
+	float:right;
+	margin-right: 30px;
+}
+
+form#form_ajout_annonce button:hover{
+	background: #005aff;
+}
+form#form_ajout_annonce textarea{
+ 	overflow: auto;
+    resize:none;
+}
+
+#popupBottom .title{
+	width:600px;
+	padding: 5px;
+	font-family: "Aller Light";
+	background:#ffc000;
+}
+
+#popupBottom .title span{
+	float:right;
+	margin-right:10px;
+	cursor: pointer;
+}
+
+#homeMessage{
+	display: block;
+	margin-top: 150px;
+	margin-bottom: 50px;
+}
+
+
+#form_sem{
+		display: block; 
+		width: 600px;
+		margin: auto;
+}
+
+#form_sem input{
+	display: block;
+	margin:auto;
+	width:600px;
+	border:none;
+	border-bottom:1px solid #ffc000;
+	padding:3px;
+	height: 40px;
+	font-size: 25px;
+}
+
+#form_sem button{
+	display:block;
+	margin: auto;
+	width:200px;
+	margin-top: 50px;
+	background: #5d96ff;
+	border:none;
+	color:#FFF;
+
+}
+
+
+#form_sem button:hover{
+	background: #005aff;
+}
+
+#users .logout{
+	position:fixed;
+	top:0;
+	right: 10%;
+	width:100px;
+	background:#de001a;
+	padding: 5px;
+}
+
+#users .logout a{
+	text-decoration: none;
+	color: #FFF;
+}
+
+#disqus_thread{
+	width:100%;
+	margin-top: 50px;
+}
+
+#entry{
+	color: #000;
+}
+
+#form_sem_by_image{
+		display: block; 
+		width: 600px;
+		margin: auto;
+}
+
+#form_sem_by_image input{
+display: none;
+}
+#form_sem_by_image button{
+	display:block;
+	margin: auto;
+	width:200px;
+	margin-top: 50px;
+	background: #5d96ff;
+	border:none;
+	color:#FFF;
+
+}
+#form_sem_by_image label{
+	cursor: pointer;
+	background: #ffc000;
+	padding: 5px;
+
+
+}
+
+
+#form_sem_by_image button:hover{
+	background: #005aff;
+}
+#

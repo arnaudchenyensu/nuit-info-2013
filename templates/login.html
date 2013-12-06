@@ -1,24 +1,38 @@
 <!doctype html>
 <html>
-<head><title>Login</title></head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Good Commerce / Connexion</title>
+        <link rel="stylesheet" href={{ url_for('static', filename='css/normalize.css') }}>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+        <link rel="author" href="humans.txt">
+    </head>
 <body>
 
   {% for message in get_flashed_messages() %}
     <div class=flash>{{ message }}</div>
   {% endfor %}
-  <h2>Create new account</h2>
-  <form method="post" action="/users">
-    {{ form.username.label }} {{ form.username }}
-    {{ form.email.label }} {{ form.email }}
-    {{ form.password.label }} {{ form.password }}
-    <input type="submit" value="Create account">
+  <h2>Créer un compte</h2>
+  <form method="post" action="/users" class="auth_form">
+    {{ form.username(placeholder="Nom Utilisateur") }}
+    {{ form.email(placeholder="Email", type="email") }}
+    {{ form.password(placeholder="Mot de passe") }}
+    <input type="submit" value="Créer un compte">
   </form>
-
-  <h2>Already have an account?</h2>
-  <form method="post" action="/login">
-    {{ form.username.label }} {{ form.username }}
-    {{ form.password.label }} {{ form.password }}
-    <input type="submit" value="Log in">
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <h2>Vous avez déjà un compte ? Connectez-vous !</h2>
+  <form method="post" action="/login" class="auth_form">
+    {{ form.username(placeholder="Nom Utilisateur") }}
+    {{ form.password(placeholder="Mot de passe") }}
+    <input type="submit" value="Connexion">
   </form>
 </body>
 </html>

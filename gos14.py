@@ -25,7 +25,7 @@ from database import init_db
 from models import User, Entry
 
 # Flask-Login
-from flask.ext.login import LoginManager, login_user, login_required
+from flask.ext.login import LoginManager, login_user, login_required, current_user
 
 import httplib
 import requests
@@ -105,7 +105,8 @@ def home():
         db = get_db()
         cur = db.execute('select id, title, text from entries order by id desc')
         entries = cur.fetchall()
-        return render_template('entries.html', entries=entries)
+        print(entries)
+        return render_template('home.html', users=entries)
     else:
         form = LoginForm()
         return render_template('login.html', form=form)
@@ -169,6 +170,9 @@ def login():
 def searchbyimage():
     return render_template('searchbyimage.html')
 
+@app.route('/help')
+def help():
+    return render_template('help.html');
 @app.route('/uploadimage', methods=['POST'])
 def uploadimage():
     uploadedfile = request.files['url_image']

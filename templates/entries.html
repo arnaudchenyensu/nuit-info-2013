@@ -1,21 +1,60 @@
 {% extends "layout.html" %}
+{% block title %}Le Commerce à questions{% endblock %}
 {% block body %}
-  {% if session.logged_in %}
-    <form action="{{ url_for('entries') }}" method=post class=add-entry>
-      <dl>
-        <dt>Title:
-        <dd><input type=text size=30 name=title>
-        <dt>Text:
-        <dd><textarea name=text rows=5 cols=40></textarea>
-        <dd><input type=submit value=Share>
-      </dl>
-    </form>
-  {% endif %}
-  <ul class=entries>
-  {% for entry in entries %}
-    <li><h2><a href="/entries/{{ entry.id }}">{{ entry.title }}</a></h2>{{ entry.text|safe }}
-  {% else %}
-    <li><em>Unbelievable.  No entries here so far</em>
-  {% endfor %}
-  </ul>
+  
+
+  <div id="content">
+
+          <div id="menu">
+                <ul>
+                    <li><a href="/"><img src="{{ url_for('static', filename='img/home_b.png') }}" alt="Home" title="Accueil"></a></li>
+                    <li><a href="/entries"><img src="{{ url_for('static', filename='img/caq_b.png') }}" alt="CAQ" title="Commerce à question"></a></li>
+                </ul>
+            </div>
+
+            <div id="sub_content">
+                <div class="title">
+                    <h1>Le CAQ</h1>
+                    <h4>Le commerce à questions</h4>
+                </div>
+
+                <div id="annonce_content">
+                    <div class="annonce">
+                      {% for entry in entries %}
+                        <li><h2><a id="entry" href="/entries/{{ entry.id }}">{{ entry.title }}</a></h2>{{ entry.text|safe }} <br><br><br>
+                        ------------------------------------------------------------------------------------------------------------------------------------------------------
+                      {% else %}
+                        <li><em>Pas encore d'annonces</em>
+                      {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div id="menu_right">
+                <ul>
+                    <li><a href="#ajouterSujet"><img src="{{ url_for('static', filename='img/ajouter_sujet.png') }}" alt=""></a></li>
+                    <li><a href="#">?</a></li>
+                </ul>
+            </div>
+            {% if session.logged_in %}
+             <div id="ajoutAnnonce">
+                <div id="popupBottom">
+                    <div class="title">
+                        <h1>Le CAQ</h1>
+                        <h4>Ajoutez votre annonce</h4>
+                        <span rel="ajoutAnnonce">x</span>
+                    </div>
+                </div>
+                <form id="form_ajout_annonce" action="{{ url_for('entries') }}" method=post class=add-entry>
+                    <input type="text" id="titre" name="title" placeholder="Titre de l'annonce">
+                    <textarea name="text" id="description" cols="30" rows="10" placeholder="Ex: Le meilleur café du monde pour tenir à la nuit de l'informatique .."></textarea>
+                    <button type="submit">Envoyer</button>
+                </form>
+            </div>
+             {% endif %}  
+        </div>   
+
+  <!-- Chargement des scripts -->
+  <script src="{{ url_for('static', filename='js/jquery.js') }}" type="text/javascript"></script>
+  <script src="{{ url_for('static', filename='js/animation.js') }}" type="text/javascript"></script>
 {% endblock %}
